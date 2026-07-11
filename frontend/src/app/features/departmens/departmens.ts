@@ -1,14 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-departmens',
-  imports: [JsonPipe],
+  imports: [CommonModule],
   templateUrl: './departmens.html',
   styleUrl: './departmens.css',
 })
 export class Departmens {
   private dataService = inject(DataService);
-  departmentsData = this.dataService.departments;
+  departmentsDataResource = this.dataService.departments;
+
+  departmentsData = computed(() => this.departmentsDataResource.value() ?? [])
 }

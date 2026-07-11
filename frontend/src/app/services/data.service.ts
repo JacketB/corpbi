@@ -8,6 +8,6 @@ import { CompanySummary, DepartmentsBreakdown, FinancialTimeline } from '../Inte
 
 export class DataService {
     summaryData = httpResource<CompanySummary>(() => `${apiAnalyticsUrl + analitycsCompanySummary}`);
-    departments = httpResource<DepartmentsBreakdown>(() => `${apiAnalyticsUrl + analitycsDepartmentsData}`);
+    departments = httpResource<DepartmentsBreakdown[]>(() => `${apiAnalyticsUrl + analitycsDepartmentsData}`);
     financial = httpResource<FinancialTimeline[]>(() => `${apiAnalyticsUrl + analitycsfinancialTimeLine}`)
 }

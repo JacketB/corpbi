@@ -1,3 +1,96 @@
-@if (this.departmentsData.hasValue()) {
-        <div>{{this.departmentsData.value() | json}}</div>
-    }
+<div class="departments-container">
+  <div class="departments-header">
+    <div class="title-group">
+      <h2>Departments Overview</h2>
+      <span class="count-badge">{{ departmentsData().length }} Teams</span>
+    </div>
+  </div>
+
+  @if (departmentsDataResource.isLoading()) {
+    <div class="loading-state">Loading departments data...</div>
+  } @else {
+    <section class="dept-grid">
+      @for (dept of departmentsData(); track dept.departmentId) {
+        <div class="dept-card glass-panel">
+          <div class="dept-card-header">
+            <h3>{{ dept.departmentName }}</h3>
+            <span class="emp-badge">{{ dept.employeeCount }} employees</span>
+          </div>
+
+          <div class="utilization-section">
+            <div class="utilization-label">
+              <span>Resource Utilization</span>
+              <span class="util-val" [class.text-danger]="dept.avgUtilization < 50" [class.text-success]="dept.avgUtilization >= 75">
+                {{ dept.avgUtilization }}%
+              </span>
+            </div>
+            <div class="bar-bg">
+              <div 
+                class="bar-fill" 
+                [style.width.%]="dept.avgUtilization"
+                [class.low-util]="dept.avgUtilization < 50"
+                [class.mid-util]="dept.avgUtilization >= 50 && dept.avgUtilization < 75"
+              ></div>
+            </div>
+          </div>
+
+          <div class="dept-metrics">
+            <div class="metric-item">
+              <span class="m-label">Revenue</span>
+              <span class="m-val text-success">${{ dept.revenue | number:'1.2-2' }}</span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">Expenses</span>
+              <span class="m-val text-danger">${{ dept.expenses | number:'1.2-2' }}</span>
+            </div>
+            <div class="metric-item">
+              <span class="m-label">Net Profit</span>
+              <span class="m-val font-bold" [class.text-success]="dept.netProfit >= 0" [class.text-danger]="dept.netProfit < 0">
+                ${{ dept.netProfit | number:'1.2-2' }}
+              </span>
+            </div>
+          </div>
+        </div>
+      }
+    </section>
+
+    <section class="table-section glass-panel">
+      <div class="table-header">
+        <h3>Performance Comparison</h3>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Department</th>
+              <th>Headcount</th>
+              <th>Avg Utilization</th>
+              <th>Revenue</th>
+              <th>Expenses</th>
+              <th>Net Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (dept of departmentsData(); track dept.departmentId) {
+              <tr>
+                <td class="dept-name-cell">{{ dept.departmentName }}</td>
+                <td>{{ dept.employeeCount }}</td>
+                <td>
+                  <span class="status-chip" [class.chip-danger]="dept.avgUtilization < 50" [class.chip-success]="dept.avgUtilization >= 75">
+                    {{ dept.avgUtilization }}%
+                  </span>
+                </td>
+                <td class="text-success">+${{ dept.revenue | number:'1.2-2' }}</td>
+                <td class="text-danger">-${{ dept.expenses | number:'1.2-2' }}</td>
+                <td class="font-bold" [class.text-success]="dept.netProfit >= 0" [class.text-danger]="dept.netProfit < 0">
+                  ${{ dept.netProfit | number:'1.2-2' }}
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+</div>
