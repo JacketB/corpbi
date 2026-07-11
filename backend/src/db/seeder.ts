@@ -34,7 +34,6 @@ export function seedCompanyData() {
 
     console.log('Starting data seeding for SoftTeamGlobal...');
 
-    // 1. Наполняем департаменты
     const insertDept = db.prepare('INSERT INTO departments (name) VALUES (?)');
     DEPARTMENTS.forEach(name => insertDept.run(name));
 
@@ -54,12 +53,10 @@ export function seedCompanyData() {
         'Management & Operations': ['Jira', 'Agile', 'Scrum', 'Resource Planning', 'Budgeting']
     };
 
-    // 2. Генерируем по 20 сотрудников в каждый департамент
     departments.forEach(dept => {
         const isManagement = dept.name === 'Management & Operations';
 
         for (let i = 0; i < 20; i++) {
-            // Рандомизируем пол сотрудника (50/50)
             const isMale = Math.random() > 0.5;
             
             let fullName = '';

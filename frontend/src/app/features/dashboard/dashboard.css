@@ -1,0 +1,150 @@
+.dashboard-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.title-group h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.3px;
+  color: var(--text-main);
+}
+
+.period-badge {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--glass-border);
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--glass-border);
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kpi-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.kpi-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+}
+
+.kpi-value {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.table-section {
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.table-header {
+  margin-bottom: 16px;
+}
+
+.table-header h3 {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-main);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13.5px;
+}
+
+.custom-table th {
+  padding: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 12px;
+}
+
+.custom-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text-main);
+}
+
+.custom-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.date-cell {
+  font-family: monospace;
+  color: var(--text-muted);
+}
+
+.progress-cell {
+  width: 140px;
+}
+
+.mini-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: var(--glass-border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  background: var(--color-success);
+  border-radius: 3px;
+}
+
+.text-success { color: var(--color-success); }
+.text-danger { color: var(--color-danger); }
+.text-accent { color: var(--color-accent); }
+.font-bold { font-weight: 600; }
