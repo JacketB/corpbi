@@ -17,6 +17,10 @@ export const routes: Routes = [
     title: 'SoftTeamGlobal - Department'
   },
   {
+    path: 'departments/:id',
+    loadComponent: () => import('./features/departments-detail/departments-detail').then(m => m.DepartmentsDetail),
+  },
+  {
     path: '**',
     redirectTo: 'dashboard'
   }

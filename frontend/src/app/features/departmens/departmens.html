@@ -13,7 +13,7 @@
   } @else {
     <section class="dept-grid">
       @for (dept of departmentsData(); track dept.departmentId) {
-        <div class="dept-card glass-panel">
+        <div class="dept-card glass-panel clickable" [routerLink]="['/departments', dept.departmentId]">
           <div class="dept-card-header">
             <h3>{{ dept.departmentName }}</h3>
             <span class="emp-badge">

@@ -6,10 +6,11 @@ import { DataService } from '../../services/data.service';
 import { DepartmentsAnalyticsService } from '../../services/departments-analytics.service';
 import { ChartColors } from '../../consts/chart.colors';
 import { TranslocoPipe } from '@jsverse/transloco';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-departmens',
-  imports: [CommonModule, TranslocoPipe],
+  imports: [CommonModule, TranslocoPipe, RouterLink],
   templateUrl: './departmens.html',
   styleUrl: './departmens.css',
 })

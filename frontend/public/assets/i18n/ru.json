@@ -65,5 +65,17 @@
     "toggleTheme": "Сменить тему",
     "toggleLanguage": "Переключить язык",
     "userRole": "Frontend Dev"
+  },
+  "deptDetail": {
+    "back": "Назад к департаментам",
+    "utilization": "средняя загрузка",
+    "financialTrend": "Финансовая динамика отдела",
+    "teamMembers": "Состав команды",
+    "cols": {
+      "name": "ФИО",
+      "grade": "Грейд",
+      "skills": "Навыки",
+      "salary": "Зарплата"
+    }
   }
 }

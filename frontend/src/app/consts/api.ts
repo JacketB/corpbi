@@ -1,5 +1,6 @@
-export const apiAnalyticsUrl = 'http://localhost:3000/api/';
-export const analitycsCompanySummary = 'analytics/company-summary';
-export const analitycsDepartmentsData = 'analytics/departments-breakdown';
-export const analitycsfinancialTimeLine = 'analytics/financial-timeline';
-export const analitycsfinancialLogs = 'analytics/financial-logs';
+export const apiAnalyticsUrl = 'http://localhost:3000/api/analytics';
+export const analitycsCompanySummary = '/company-summary';
+export const analitycsDepartmentsData = '/departments-breakdown';
+export const analitycsfinancialTimeLine = '/financial-timeline';
+export const analitycsfinancialLogs = '/financial-logs';
+export const analitycsEmployees = '/employees'

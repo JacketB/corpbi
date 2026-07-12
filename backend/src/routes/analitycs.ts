@@ -187,4 +187,23 @@ router.get('/departments-breakdown', (req, res) => {
     }
 });
 
+router.get('/employees', (req, res) => {
+  try {
+    const { department_id } = req.query;
+
+    if (department_id) {
+      const stmt = db.prepare('SELECT * FROM employees WHERE department_id = ?');
+      const employees = stmt.all(department_id);
+      return res.json(employees);
+    }
+
+    const stmt = db.prepare('SELECT * FROM employees');
+    const allEmployees = stmt.all();
+    res.json(allEmployees);
+  } catch (error) {
+    console.error('Error fetching employees:', error);
+    res.status(500).json({ error: 'Failed to fetch employees' });
+  }
+});
+
 export default router;

@@ -23,3 +23,12 @@ export interface DepartmentsBreakdown {
     avgUtilization: number,
     employeeCount: number
 }
+
+export interface Employee {
+  id: number;
+  full_name: string;
+  grade: string;
+  skills: string;
+  salary: number;
+  department_id: number;
+}

@@ -224,3 +224,7 @@
 .text-danger { color: var(--color-danger); }
 .font-bold { font-weight: 600; }
 .loading-state { color: var(--text-muted); padding: 24px 0; }
+
+.clickable {
+  cursor: pointer
+}

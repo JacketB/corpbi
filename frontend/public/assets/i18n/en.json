@@ -65,5 +65,17 @@
     "toggleTheme": "Toggle Theme",
     "toggleLanguage": "Switch Language",
     "userRole": "Frontend Dev"
+  },
+  "deptDetail": {
+    "back": "Back to Departments",
+    "utilization": "avg utilization",
+    "financialTrend": "Department Financial Trend",
+    "teamMembers": "Team Members",
+    "cols": {
+      "name": "Full Name",
+      "grade": "Grade",
+      "skills": "Skills",
+      "salary": "Salary"
+    }
   }
 }

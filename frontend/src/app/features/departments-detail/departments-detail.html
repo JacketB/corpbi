@@ -1,0 +1,77 @@
+<div class="dept-detail-container">
+  <div class="navigation-bar">
+    <a routerLink="/departments" class="back-btn">
+      ← {{ 'deptDetail.back' | transloco }}
+    </a>
+  </div>
+
+  @if (departmentsResource.isLoading()) {
+    <div class="loading-state">{{ 'common.loading' | transloco }}</div>
+  } @else if (department(); as dept) {
+
+    <header class="dept-header">
+      <h2>{{ dept.departmentName }}</h2>
+      <span class="status-chip" [class.chip-success]="dept.avgUtilization >= 75">
+        {{ dept.avgUtilization }}% {{ 'deptDetail.utilization' | transloco }}
+      </span>
+    </header>
+
+    <section class="kpi-grid">
+      <div class="kpi-card glass-panel">
+        <span class="kpi-title">{{ 'departments.card.employeesCount' | transloco: { count: '' } }}</span>
+        <div class="kpi-value">{{ dept.employeeCount }}</div>
+      </div>
+      <div class="kpi-card glass-panel">
+        <span class="kpi-title">{{ 'departments.metrics.revenue' | transloco }}</span>
+        <div class="kpi-value text-success">${{ dept.revenue | number:'1.2-2' }}</div>
+      </div>
+      <div class="kpi-card glass-panel">
+        <span class="kpi-title">{{ 'departments.metrics.expenses' | transloco }}</span>
+        <div class="kpi-value text-danger">${{ dept.expenses | number:'1.2-2' }}</div>
+      </div>
+      <div class="kpi-card glass-panel">
+        <span class="kpi-title">{{ 'departments.metrics.netProfit' | transloco }}</span>
+        <div class="kpi-value" [class.text-success]="dept.netProfit >= 0" [class.text-danger]="dept.netProfit < 0">
+          ${{ dept.netProfit | number:'1.2-2' }}
+        </div>
+      </div>
+    </section>
+
+    <!-- График отдела -->
+    <section class="chart-section glass-panel">
+      <h3>{{ 'deptDetail.financialTrend' | transloco }}</h3>
+      <div class="chart-wrapper">
+        <canvas #deptChartCanvas></canvas>
+      </div>
+    </section>
+
+    <!-- Таблица сотрудников отдела -->
+    <section class="table-section glass-panel">
+      <h3>{{ 'deptDetail.teamMembers' | transloco }}</h3>
+
+      <div class="table-wrapper">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>{{ 'deptDetail.cols.name' | transloco }}</th>
+              <th>{{ 'deptDetail.cols.grade' | transloco }}</th>
+              <th>{{ 'deptDetail.cols.skills' | transloco }}</th>
+              <th>{{ 'deptDetail.cols.salary' | transloco }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (emp of employees(); track emp.id) {
+              <tr>
+                <td class="font-bold">{{ emp.full_name }}</td>
+                <td><span class="grade-badge">{{ emp.grade }}</span></td>
+                <td class="skills-cell">{{ emp.skills }}</td>
+                <td>${{ emp.salary | number:'1.2-2' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  }
+</div>
