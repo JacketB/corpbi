@@ -9,16 +9,29 @@ const DEPARTMENTS = [
     'Management & Operations'
 ];
 
+const DEPARTMENT_EMP_LIMITS: Record<string, { min: number; max: number }> = {
+    'QA Department': { min: 25, max: 40 },
+    'Frontend Development': { min: 45, max: 70 },
+    'Backend Development': { min: 60, max: 100 },
+    'Mobile Team': { min: 20, max: 35 },
+    'Design & UX': { min: 20, max: 30 },
+    'Management & Operations': { min: 20, max: 25 }
+};
+
 const MALE_NAMES = ['Александр', 'Максим', 'Дмитрий', 'Артем', 'Никита', 'Иван', 'Михаил', 'Даниил', 'Егор', 'Андрей'];
 const MALE_SURNAMES = ['Иванов', 'Петров', 'Сидоров', 'Ковалев', 'Смирнов', 'Кузнецов', 'Попов', 'Васильев', 'Павлов', 'Дещеня'];
 const MALE_PATRONYMICS = ['Александрович', 'Игоревич', 'Сергеевич', 'Николаевич', 'Дмитриевич', 'Семенович', 'Максимович'];
 
 const FEMALE_NAMES = ['Анна', 'Елена', 'Мария', 'Ольга', 'Наталья', 'Екатерина', 'Дарья', 'Ирина', 'Татьяна', 'Анастасия'];
-const FEMALE_SURNAMES = ['Иванова', 'Петрова', 'Сидорова', 'Ковалева', 'Смирнова', 'Кузнецова', 'Попова', 'Васильева', 'Павлова', 'Дещеня']; // "Дещеня" не склоняется, оставляем как есть
+const FEMALE_SURNAMES = ['Иванова', 'Петрова', 'Сидорова', 'Ковалева', 'Смирнова', 'Кузнецова', 'Попова', 'Васильева', 'Павлова', 'Дещеня'];
 const FEMALE_PATRONYMICS = ['Александровна', 'Игоревна', 'Сергеевна', 'Николаевна', 'Дмитриевна', 'Семеновна', 'Максимовна'];
 
 function getRandomElement<T>(arr: T[]): T {
     return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getRandomInt(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function generateRandomPhone(): string {
@@ -53,10 +66,16 @@ export function seedCompanyData() {
         'Management & Operations': ['Jira', 'Agile', 'Scrum', 'Resource Planning', 'Budgeting']
     };
 
+    let totalEmployees = 0;
+
     departments.forEach(dept => {
         const isManagement = dept.name === 'Management & Operations';
+        
+        const limits = DEPARTMENT_EMP_LIMITS[dept.name] || { min: 20, max: 40 };
+        const employeesInDeptCount = getRandomInt(limits.min, limits.max);
+        totalEmployees += employeesInDeptCount;
 
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < employeesInDeptCount; i++) {
             const isMale = Math.random() > 0.5;
             
             let fullName = '';
@@ -87,14 +106,16 @@ export function seedCompanyData() {
         }
     });
 
-    console.log('Successfully seeded 6 departments and 120 employees with correct genders.');
+    console.log(`Successfully seeded ${departments.length} departments and ${totalEmployees} employees.`);
     seedHistoricalMetrics();
 }
 
 function seedHistoricalMetrics() {
-    console.log('Generating historical metrics for the past 180 days...');
+    console.log('Generating historical metrics for the past 365 days...');
     
     const employees = db.prepare('SELECT * FROM employees').all() as any[];
+    const departments = db.prepare('SELECT * FROM departments').all() as any[];
+
     const insertEmpMetric = db.prepare(`
         INSERT INTO employee_metrics (employee_id, timestamp, utilization_rate, hours_worked)
         VALUES (?, ?, ?, ?)
@@ -108,7 +129,7 @@ function seedHistoricalMetrics() {
     const oneDayInMs = 24 * 60 * 60 * 1000;
 
     const runTransaction = db.transaction(() => {
-        for (let day = 180; day >= 0; day--) {
+        for (let day = 365; day >= 0; day--) {
             const currentDayTimestamp = now - (day * oneDayInMs);
             const dateObj = new Date(currentDayTimestamp);
             const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
@@ -119,9 +140,10 @@ function seedHistoricalMetrics() {
                     let hoursWorked = 8;
 
                     if (emp.is_billable === 1) {
-                        utilization = 75 + Math.random() * 20;
+                        utilization = 70 + Math.random() * 25;
+                        
                         if (emp.department_id === 1 && day > 60 && day < 90) {
-                            utilization = 30 + Math.random() * 20;
+                            utilization = 35 + Math.random() * 20;
                         }
                     }
 
@@ -133,15 +155,26 @@ function seedHistoricalMetrics() {
                     );
                 });
             }
-
             if (dateObj.getDate() === 1) {
-                insertFinLog.run(null, currentDayTimestamp, 'Infrastructure', 'expense', 15000, 'Monthly AWS/Azure cloud cost');
-                insertFinLog.run(null, currentDayTimestamp, 'Software Licenses', 'expense', 5000, 'JetBrains, Jira, Slack subscriptions');
-                insertFinLog.run(null, currentDayTimestamp, 'Marketing', 'expense', 8000, 'Global marketing campaigns');
+                insertFinLog.run(null, currentDayTimestamp, 'Infrastructure', 'expense', 15000 + Math.floor(Math.random() * 3000), 'Monthly AWS/Azure cloud cost');
+                insertFinLog.run(null, currentDayTimestamp, 'Software Licenses', 'expense', 5000 + Math.floor(Math.random() * 1000), 'JetBrains, Jira, Slack subscriptions');
+                insertFinLog.run(null, currentDayTimestamp, 'Marketing', 'expense', 8000 + Math.floor(Math.random() * 4000), 'Global marketing campaigns');
+
+                departments.forEach(dept => {
+                    const deptEmployees = employees.filter(e => e.department_id === dept.id);
+                    const totalDeptSalary = deptEmployees.reduce((sum, e) => sum + e.salary, 0);
+
+                    insertFinLog.run(dept.id, currentDayTimestamp, 'Salaries', 'expense', totalDeptSalary, `Monthly salaries for ${dept.name}`);
+
+                    if (dept.name !== 'Management & Operations') {
+                        const revenue = Math.floor(totalDeptSalary * (1.3 + Math.random() * 0.5));
+                        insertFinLog.run(dept.id, currentDayTimestamp, 'Client Projects', 'income', revenue, `Project income for ${dept.name}`);
+                    }
+                });
             }
         }
     });
 
     runTransaction();
-    console.log('Historical metrics successfully generated.');
+    console.log('Historical metrics and financial logs successfully generated.');
 }
