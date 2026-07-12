@@ -23,6 +23,7 @@ build/
 .vscode/*
 !.vscode/extensions.json
 !.vscode/launch.json
+!.vscode/settings.json
 .idea/
 *.suo
 *.ntvs*
