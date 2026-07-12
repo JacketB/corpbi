@@ -1,0 +1,69 @@
+{
+  "common": {
+    "loadingDepartments": "Загрузка данных по департаментам...",
+    "loadingMetrics": "Загрузка метрик..."
+  },
+  "departments": {
+    "header": {
+      "title": "Обзор департаментов",
+      "teamsCount": "{{ count }} команд"
+    },
+    "card": {
+      "employeesCount": "{{ count }} сотрудников",
+      "resourceUtilization": "Загрузка ресурсов"
+    },
+    "metrics": {
+      "revenue": "Выручка",
+      "expenses": "Расходы",
+      "netProfit": "Чистая прибыль"
+    },
+    "charts": {
+      "expensesByDepartment": "Расходы по департаментам",
+      "revenueByDepartment": "Выручка по департаментам",
+      "netProfitByDepartment": "Чистая прибыль по департаментам"
+    },
+    "table": {
+      "title": "Сравнение эффективности",
+      "cols": {
+        "department": "Департамент",
+        "headcount": "Штат",
+        "avgUtilization": "Средняя утилизация",
+        "revenue": "Выручка",
+        "expenses": "Расходы",
+        "netProfit": "Чистая прибыль"
+      }
+    }
+  },
+  "dashboard": {
+    "header": {
+      "title": "Финансовый мониторинг",
+      "lastDays": "За последние {{ days }} дней"
+    },
+    "kpi": {
+      "revenue": "Выручка",
+      "expenses": "Расходы",
+      "netProfit": "Чистая прибыль",
+      "profitMargin": "Маржинальность"
+    },
+    "chart": {
+      "title": "Динамика финансовых показателей"
+    },
+    "table": {
+      "title": "Движение денежных средств",
+      "cols": {
+        "date": "Дата",
+        "revenue": "Выручка",
+        "expenses": "Расходы",
+        "netProfit": "Чистая прибыль",
+        "marginSplit": "Доля маржи"
+      }
+    }
+  },
+  "nav": {
+    "dashboard": "Дашборд",
+    "departments": "Департаменты",
+    "toggleTheme": "Сменить тему",
+    "toggleLanguage": "Переключить язык",
+    "userRole": "Frontend Dev"
+  }
+}

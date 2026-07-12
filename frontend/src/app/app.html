@@ -12,19 +12,23 @@
           <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z" />
           <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
         </svg>
-        Dashboard
+        {{ 'nav.dashboard' | transloco }}
       </a>
 
       <a routerLink="/departments" routerLinkActive="active-link" class="nav-item">
         <svg class="nav-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        Departments
+        {{ 'nav.departments' | transloco }}
       </a>
     </nav>
 
     <div class="header-right">
-      <button class="theme-toggle-btn" (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
+      <button class="lang-toggle-btn" (click)="toggleLanguage()" [title]="'nav.toggleLanguage' | transloco">
+        <span class="lang-code">{{ activeLang().toUpperCase() }}</span>
+      </button>
+
+      <button class="theme-toggle-btn" (click)="themeService.toggleTheme()" [attr.aria-label]="'nav.toggleTheme' | transloco">
         @if (themeService.currentTheme() === 'dark') {
           <svg class="theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.364l.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -37,7 +41,7 @@
       </button>
 
       <div class="user-profile">
-        <span class="user-role">Frontend Dev</span>
+        <span class="user-role">{{ 'nav.userRole' | transloco }}</span>
         <div class="avatar"></div>
       </div>
     </div>

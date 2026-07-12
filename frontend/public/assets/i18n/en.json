@@ -1,0 +1,69 @@
+{
+  "common": {
+    "loadingDepartments": "Loading departments data...",
+    "loadingMetrics": "Loading metrics..."
+  },
+  "departments": {
+    "header": {
+      "title": "Departments Overview",
+      "teamsCount": "{{ count }} Teams"
+    },
+    "card": {
+      "employeesCount": "{{ count }} employees",
+      "resourceUtilization": "Resource Utilization"
+    },
+    "metrics": {
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "netProfit": "Net Profit"
+    },
+    "charts": {
+      "expensesByDepartment": "Expenses by Department",
+      "revenueByDepartment": "Revenue by Department",
+      "netProfitByDepartment": "Net Profit by Department"
+    },
+    "table": {
+      "title": "Performance Comparison",
+      "cols": {
+        "department": "Department",
+        "headcount": "Headcount",
+        "avgUtilization": "Avg Utilization",
+        "revenue": "Revenue",
+        "expenses": "Expenses",
+        "netProfit": "Net Profit"
+      }
+    }
+  },
+  "dashboard": {
+    "header": {
+      "title": "Financial Monitoring",
+      "lastDays": "Last {{ days }} days"
+    },
+    "kpi": {
+      "revenue": "Revenue",
+      "expenses": "Expenses",
+      "netProfit": "Net Profit",
+      "profitMargin": "Profit Margin"
+    },
+    "chart": {
+      "title": "Financial Performance Trend"
+    },
+    "table": {
+      "title": "Daily Cash Flow",
+      "cols": {
+        "date": "Date",
+        "revenue": "Revenue",
+        "expenses": "Expenses",
+        "netProfit": "Net Profit",
+        "marginSplit": "Margin Split"
+      }
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "departments": "Departments",
+    "toggleTheme": "Toggle Theme",
+    "toggleLanguage": "Switch Language",
+    "userRole": "Frontend Dev"
+  }
+}

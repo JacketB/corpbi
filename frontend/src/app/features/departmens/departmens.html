@@ -1,25 +1,29 @@
 <div class="departments-container">
   <div class="departments-header">
     <div class="title-group">
-      <h2>Departments Overview</h2>
-      <span class="count-badge">{{ departmentsData().length }} Teams</span>
+      <h2>{{ 'departments.header.title' | transloco }}</h2>
+      <span class="count-badge">
+        {{ 'departments.header.teamsCount' | transloco: { count: departmentsData().length } }}
+      </span>
     </div>
   </div>
 
   @if (departmentsDataResource.isLoading()) {
-    <div class="loading-state">Loading departments data...</div>
+    <div class="loading-state">{{ 'common.loadingDepartments' | transloco }}</div>
   } @else {
     <section class="dept-grid">
       @for (dept of departmentsData(); track dept.departmentId) {
         <div class="dept-card glass-panel">
           <div class="dept-card-header">
             <h3>{{ dept.departmentName }}</h3>
-            <span class="emp-badge">{{ dept.employeeCount }} employees</span>
+            <span class="emp-badge">
+              {{ 'departments.card.employeesCount' | transloco: { count: dept.employeeCount } }}
+            </span>
           </div>
 
           <div class="utilization-section">
             <div class="utilization-label">
-              <span>Resource Utilization</span>
+              <span>{{ 'departments.card.resourceUtilization' | transloco }}</span>
               <span class="util-val" [class.text-danger]="dept.avgUtilization < 50" [class.text-success]="dept.avgUtilization >= 75">
                 {{ dept.avgUtilization }}%
               </span>
@@ -36,15 +40,15 @@
 
           <div class="dept-metrics">
             <div class="metric-item">
-              <span class="m-label">Revenue</span>
+              <span class="m-label">{{ 'departments.metrics.revenue' | transloco }}</span>
               <span class="m-val text-success">${{ dept.revenue | number:'1.2-2' }}</span>
             </div>
             <div class="metric-item">
-              <span class="m-label">Expenses</span>
+              <span class="m-label">{{ 'departments.metrics.expenses' | transloco }}</span>
               <span class="m-val text-danger">${{ dept.expenses | number:'1.2-2' }}</span>
             </div>
             <div class="metric-item">
-              <span class="m-label">Net Profit</span>
+              <span class="m-label">{{ 'departments.metrics.netProfit' | transloco }}</span>
               <span class="m-val font-bold" [class.text-success]="dept.netProfit >= 0" [class.text-danger]="dept.netProfit < 0">
                 ${{ dept.netProfit | number:'1.2-2' }}
               </span>
@@ -55,41 +59,41 @@
     </section>
 
     <section class="chart-section glass-panel">
-      <h3>Expenses by Department</h3>
+      <h3>{{ 'departments.charts.expensesByDepartment' | transloco }}</h3>
       <div class="chart-container">
         <canvas #expensesChartCanvas></canvas>
       </div>
     </section>
 
     <section class="chart-section glass-panel">
-      <h3>Revenue by Department</h3>
+      <h3>{{ 'departments.charts.revenueByDepartment' | transloco }}</h3>
       <div class="chart-container">
         <canvas #revenueChartCanvas></canvas>
       </div>
     </section>
 
     <section class="chart-section glass-panel">
-      <h3>Net Profit by Department</h3>
+      <h3>{{ 'departments.charts.netProfitByDepartment' | transloco }}</h3>
       <div class="chart-container">
         <canvas #profitChartCanvas></canvas>
       </div>
-  </section>
+    </section>
 
     <section class="table-section glass-panel">
       <div class="table-header">
-        <h3>Performance Comparison</h3>
+        <h3>{{ 'departments.table.title' | transloco }}</h3>
       </div>
 
       <div class="table-wrapper">
         <table class="custom-table">
           <thead>
             <tr>
-              <th>Department</th>
-              <th>Headcount</th>
-              <th>Avg Utilization</th>
-              <th>Revenue</th>
-              <th>Expenses</th>
-              <th>Net Profit</th>
+              <th>{{ 'departments.table.cols.department' | transloco }}</th>
+              <th>{{ 'departments.table.cols.headcount' | transloco }}</th>
+              <th>{{ 'departments.table.cols.avgUtilization' | transloco }}</th>
+              <th>{{ 'departments.table.cols.revenue' | transloco }}</th>
+              <th>{{ 'departments.table.cols.expenses' | transloco }}</th>
+              <th>{{ 'departments.table.cols.netProfit' | transloco }}</th>
             </tr>
           </thead>
           <tbody>

@@ -4,10 +4,11 @@ import { Chart } from 'chart.js/auto';
 
 import { DataService } from '../../services/data.service';
 import { ChartColors } from '../../consts/chart.colors';
+import { TranslocoPipe } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DecimalPipe, CommonModule],
+  imports: [DecimalPipe, CommonModule, TranslocoPipe],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
