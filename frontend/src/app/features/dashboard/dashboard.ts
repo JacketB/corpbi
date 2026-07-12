@@ -64,14 +64,23 @@ export class Dashboard {
       data: {
         labels: groups.dates,
         datasets: [
-          { label: 'Revenue', data: groups.revenue, borderColor: ChartColors.red, tension: 0.3 },
-          { label: 'Expenses', data: groups.expenses, borderColor: ChartColors.green, tension: 0.3 },
-          { label: 'Net Profit', data: groups.netProfit, borderColor: ChartColors.blue, tension: 0.3 }
+          { label: 'Revenue', data: groups.revenue, borderColor: ChartColors.red, backgroundColor:ChartColors.red, tension: 0.3 },
+          { label: 'Expenses', data: groups.expenses, borderColor: ChartColors.green, backgroundColor:ChartColors.green, tension: 0.3 },
+          { label: 'Net Profit', data: groups.netProfit, borderColor: ChartColors.blue, backgroundColor:ChartColors.blue, tension: 0.3 }
         ]
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+            align: 'start',
+            labels: {
+              usePointStyle: true
+            }
+          }
+        }
       }
     });
   }

@@ -112,6 +112,23 @@ router.get('/financial-timeline', (req, res) => {
     }
 });
 
+router.get('/financial-logs', (req, res) => {
+  try {
+    const logs = db.prepare(`
+      SELECT 
+        fl.*,
+        d.name as department_name
+      FROM financial_logs fl
+      LEFT JOIN departments d ON fl.department_id = d.id
+    `).all();
+
+    res.json(logs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to fetch financial logs' });
+  }
+});
+
 router.get('/departments-breakdown', (req, res) => {
     const from = parseInt(req.query.from as string) || (Date.now() - 30 * 24 * 60 * 60 * 1000);
     const to = parseInt(req.query.to as string) || Date.now();
